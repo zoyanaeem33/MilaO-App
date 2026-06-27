@@ -13,14 +13,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   final List<String> _filters = [
     'Phone', 'Bag', 'Documents', 'Keys',
-    'Lahore', 'Is Hafte', 'Gum', 'Mila',
+    'Lahore', 'This Week', 'Lost', 'Found',
   ];
 
   final List<Map<String, dynamic>> _results = [
     {
       'name': 'Samsung Phone',
       'location': 'Anarkali',
-      'time': 'Aaj',
+      'time': 'Today',
       'status': 'lost',
       'icon': Icons.phone_android,
       'color': Color(0xFFFFF7ED),
@@ -29,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       'name': 'iPhone 14 Pro',
       'location': 'DHA Phase 5',
-      'time': '2 din',
+      'time': '2 days ago',
       'status': 'found',
       'icon': Icons.phone_iphone,
       'color': Color(0xFFEFF6FF),
@@ -38,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
     {
       'name': 'Redmi Note 12',
       'location': 'Model Town',
-      'time': 'Kal',
+      'time': 'Yesterday',
       'status': 'lost',
       'icon': Icons.smartphone,
       'color': Color(0xFFF0FDF4),
@@ -71,13 +71,14 @@ class _SearchScreenState extends State<SearchScreen> {
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
-                          hintText: 'Dhoondo...',
+                          hintText: 'Search...',
                           hintStyle: GoogleFonts.nunito(
                             color: const Color(0xFF9CA3AF),
                             fontSize: 14,
                           ),
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 12),
                         ),
                       ),
                     ),
@@ -123,7 +124,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 6,
+                        horizontal: 14,
+                        vertical: 6,
                       ),
                       decoration: BoxDecoration(
                         color: isSelected
@@ -157,7 +159,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                '${_results.length} NATAIJ MILE',
+                '${_results.length} RESULTS FOUND',
                 style: GoogleFonts.nunito(
                   fontSize: 11,
                   fontWeight: FontWeight.w800,
@@ -168,7 +170,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             const SizedBox(height: 8),
 
-            // Results
+            // Results List
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -222,7 +224,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               Row(
                                 children: [
                                   const Icon(Icons.location_on,
-                                      size: 12, color: Color(0xFF9CA3AF)),
+                                      size: 12,
+                                      color: Color(0xFF9CA3AF)),
                                   const SizedBox(width: 2),
                                   Text(item['location'],
                                       style: GoogleFonts.nunito(
@@ -230,7 +233,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                           color: const Color(0xFF9CA3AF))),
                                   const SizedBox(width: 8),
                                   const Icon(Icons.access_time,
-                                      size: 12, color: Color(0xFF9CA3AF)),
+                                      size: 12,
+                                      color: Color(0xFF9CA3AF)),
                                   const SizedBox(width: 2),
                                   Text(item['time'],
                                       style: GoogleFonts.nunito(
@@ -249,7 +253,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
-                                  item['status'] == 'lost' ? 'Gum' : 'Mila',
+                                  item['status'] == 'lost'
+                                      ? 'Lost'
+                                      : 'Found',
                                   style: GoogleFonts.nunito(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w700,

@@ -48,7 +48,7 @@ class _PostScreenState extends State<PostScreen> {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    'Naya Post Karo',
+                    'New Post',
                     style: GoogleFonts.nunito(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
@@ -78,22 +78,26 @@ class _PostScreenState extends State<PostScreen> {
                             child: GestureDetector(
                               onTap: () => setState(() => _selectedType = 0),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 decoration: BoxDecoration(
                                   color: _selectedType == 0
                                       ? Colors.white
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: _selectedType == 0
-                                      ? [BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
-                                          blurRadius: 4,
-                                        )]
+                                      ? [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            blurRadius: 4,
+                                          )
+                                        ]
                                       : [],
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Meri Cheez Gum Hai',
+                                    'I Lost Something',
                                     style: GoogleFonts.nunito(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
@@ -110,22 +114,26 @@ class _PostScreenState extends State<PostScreen> {
                             child: GestureDetector(
                               onTap: () => setState(() => _selectedType = 1),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 decoration: BoxDecoration(
                                   color: _selectedType == 1
                                       ? Colors.white
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: _selectedType == 1
-                                      ? [BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
-                                          blurRadius: 4,
-                                        )]
+                                      ? [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            blurRadius: 4,
+                                          )
+                                        ]
                                       : [],
                                 ),
                                 child: Center(
                                   child: Text(
-                                    'Cheez Mili Hai',
+                                    'I Found Something',
                                     style: GoogleFonts.nunito(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
@@ -144,8 +152,8 @@ class _PostScreenState extends State<PostScreen> {
                     const SizedBox(height: 16),
 
                     // Item Name
-                    _buildLabel('Cheez ka Naam'),
-                    _buildTextField('Jaise: Samsung Galaxy A54'),
+                    _buildLabel('Item Name'),
+                    _buildTextField('e.g. Samsung Galaxy A54'),
                     const SizedBox(height: 14),
 
                     // Category
@@ -179,7 +187,7 @@ class _PostScreenState extends State<PostScreen> {
                     const SizedBox(height: 14),
 
                     // Description
-                    _buildLabel('Tafseel (Description)'),
+                    _buildLabel('Description'),
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: const Color(0xFFE5E7EB)),
@@ -189,7 +197,7 @@ class _PostScreenState extends State<PostScreen> {
                         maxLines: 3,
                         style: GoogleFonts.nunito(fontSize: 14),
                         decoration: InputDecoration(
-                          hintText: 'Cheez ka rang, size, koi khas nishaan...',
+                          hintText: 'Color, size, any special marks...',
                           hintStyle: GoogleFonts.nunito(
                             color: const Color(0xFF9CA3AF),
                             fontSize: 14,
@@ -202,24 +210,23 @@ class _PostScreenState extends State<PostScreen> {
                     const SizedBox(height: 14),
 
                     // Location
-                    _buildLabel('Jagah (Location)'),
-                    _buildTextField('Jaise: Anarkali Bazaar, Lahore'),
+                    _buildLabel('Location'),
+                    _buildTextField('e.g. Anarkali Bazaar, Lahore'),
                     const SizedBox(height: 14),
 
                     // Date
-                    _buildLabel('Tarikh'),
+                    _buildLabel('Date'),
                     _buildTextField('DD/MM/YYYY'),
                     const SizedBox(height: 14),
 
                     // Photo Upload
-                    _buildLabel('Tasveer Upload Karo'),
+                    _buildLabel('Upload Photo'),
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: const Color(0xFFE5E7EB),
-                          style: BorderStyle.solid,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(14),
@@ -233,7 +240,7 @@ class _PostScreenState extends State<PostScreen> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Yahan tap karo ya gallery se chunno',
+                            'Tap here or choose from gallery',
                             style: GoogleFonts.nunito(
                               fontSize: 13,
                               color: const Color(0xFF9CA3AF),
@@ -261,7 +268,7 @@ class _PostScreenState extends State<PostScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Post Karo',
+                              'Submit Post',
                               style: GoogleFonts.nunito(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w800,
@@ -269,7 +276,8 @@ class _PostScreenState extends State<PostScreen> {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            const Icon(Icons.send, color: Colors.white, size: 18),
+                            const Icon(Icons.send,
+                                color: Colors.white, size: 18),
                           ],
                         ),
                       ),

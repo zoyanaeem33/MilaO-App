@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'chat_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -29,8 +30,8 @@ class ProfileScreen extends StatelessWidget {
                         Container(
                           width: 80,
                           height: 80,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFFF7ED),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFFFF7ED),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -76,8 +77,11 @@ class ProfileScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.phone,
-                            size: 14, color: Color(0xFF6B7280)),
+                        const Icon(
+                          Icons.phone,
+                          size: 14,
+                          color: Color(0xFF6B7280),
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           '+92 300 1234567',
@@ -87,8 +91,11 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 4),
-                        const Icon(Icons.verified,
-                            size: 16, color: Color(0xFF22C55E)),
+                        const Icon(
+                          Icons.verified,
+                          size: 16,
+                          color: Color(0xFF22C55E),
+                        ),
                       ],
                     ),
                   ],
@@ -104,10 +111,18 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    _buildStat('2', 'Gum'),
-                    Container(width: 1, height: 50, color: const Color(0xFFF3F4F6)),
-                    _buildStat('3', 'Mili'),
-                    Container(width: 1, height: 50, color: const Color(0xFFF3F4F6)),
+                    _buildStat('2', 'Lost'),
+                    Container(
+                      width: 1,
+                      height: 50,
+                      color: const Color(0xFFF3F4F6),
+                    ),
+                    _buildStat('3', 'Found'),
+                    Container(
+                      width: 1,
+                      height: 50,
+                      color: const Color(0xFFF3F4F6),
+                    ),
                     _buildStat('4', 'Resolved'),
                   ],
                 ),
@@ -120,22 +135,29 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     _buildMenuItem(
                       icon: Icons.phone_android,
-                      label: 'Meri Gum Cheezain',
+                      label: 'My Lost Items',
                       onTap: () {},
                     ),
                     _buildMenuItem(
                       icon: Icons.account_balance_wallet,
-                      label: 'Meri Mili Cheezain',
+                      label: 'My Found Items',
                       onTap: () {},
                     ),
                     _buildMenuItem(
-                      icon: Icons.chat_bubble_outline,
-                      label: 'Chat History',
-                      onTap: () {},
-                    ),
+                        icon: Icons.chat_bubble_outline,
+                        label: 'Chat History',
+                        onTap: () {
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => const ChatScreen(),
+      ),
+    );
+  },
+),
                     _buildMenuItem(
                       icon: Icons.shield_outlined,
-                      label: 'Identity Verify Karo',
+                      label: 'Verify Identity',
                       onTap: () {},
                     ),
                     _buildMenuItem(
@@ -237,7 +259,11 @@ class ProfileScreen extends StatelessWidget {
                 color: const Color(0xFFFFF7ED),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Icon(icon, color: const Color(0xFFF97316), size: 18),
+              child: Icon(
+                icon,
+                color: const Color(0xFFF97316),
+                size: 18,
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -250,7 +276,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Icon(Icons.chevron_right, color: Color(0xFFD1D5DB)),
+            const Icon(
+              Icons.chevron_right,
+              color: Color(0xFFD1D5DB),
+            ),
           ],
         ),
       ),

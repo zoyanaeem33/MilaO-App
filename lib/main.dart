@@ -4,7 +4,8 @@ import 'screens/home_screen.dart';
 import 'screens/post_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/profile_screen.dart';
-
+import 'screens/records_screen.dart';
+import 'screens/chat_screen.dart';
 void main() {
   runApp(const MilaOApp());
 }
@@ -15,7 +16,7 @@ class MilaOApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MilaO',
+      title: 'Findly',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -43,7 +44,7 @@ class _MainNavigationState extends State<MainNavigation> {
     const HomeScreen(),
     const SearchScreen(),
     const PostScreen(),
-    const Scaffold(body: Center(child: Text('Records'))),
+    const RecordsScreen(),
     const ProfileScreen(),
   ];
 

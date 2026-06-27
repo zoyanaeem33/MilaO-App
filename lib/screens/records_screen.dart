@@ -1,61 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class RecordsScreen extends StatefulWidget {
+  const RecordsScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<RecordsScreen> createState() => _RecordsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _RecordsScreenState extends State<RecordsScreen> {
   int _selectedTab = 0;
-
-  final List<Map<String, dynamic>> _lostItems = [
-    {
-      'name': 'Samsung Phone',
-      'location': 'Anarkali Bazaar',
-      'time': '2 hours ago',
-      'status': 'lost',
-      'icon': Icons.phone_android,
-      'color': Color(0xFFFFF7ED),
-      'iconColor': Color(0xFFF97316),
-    },
-    {
-      'name': 'Black Bag',
-      'location': 'Gulberg Metro',
-      'time': 'Yesterday',
-      'status': 'lost',
-      'icon': Icons.work,
-      'color': Color(0xFFEFF6FF),
-      'iconColor': Color(0xFF3B82F6),
-    },
-    {
-      'name': 'CNIC Card',
-      'location': 'Defence, Lahore',
-      'time': '3 days ago',
-      'status': 'lost',
-      'icon': Icons.credit_card,
-      'color': Color(0xFFF0FDF4),
-      'iconColor': Color(0xFF22C55E),
-    },
-    {
-      'name': 'House Key',
-      'location': 'Johar Town',
-      'time': 'Today',
-      'status': 'found',
-      'icon': Icons.key,
-      'color': Color(0xFFF5F3FF),
-      'iconColor': Color(0xFF8B5CF6),
-    },
-  ];
 
   final List<Map<String, dynamic>> _foundItems = [
     {
       'name': 'Brown Wallet',
       'location': 'Emporium Mall',
-      'time': '1 hour ago',
-      'status': 'found',
+      'date': '20 Jun',
+      'status': 'open',
       'icon': Icons.account_balance_wallet,
       'color': Color(0xFFF0FDF4),
       'iconColor': Color(0xFF22C55E),
@@ -63,18 +24,46 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'name': 'Glasses',
       'location': 'Packages Mall',
-      'time': 'Yesterday',
-      'status': 'found',
+      'date': '18 Jun',
+      'status': 'resolved',
       'icon': Icons.remove_red_eye,
       'color': Color(0xFFFFF7ED),
       'iconColor': Color(0xFFF97316),
+    },
+    {
+      'name': 'CNIC',
+      'location': 'Liberty Market',
+      'date': '15 Jun',
+      'status': 'open',
+      'icon': Icons.credit_card,
+      'color': Color(0xFFEFF6FF),
+      'iconColor': Color(0xFF3B82F6),
+    },
+  ];
+
+  final List<Map<String, dynamic>> _lostItems = [
+    {
+      'name': 'Samsung Phone',
+      'location': 'Anarkali',
+      'date': '24 Jun',
+      'status': 'still_lost',
+      'icon': Icons.phone_android,
+      'color': Color(0xFFFFF7ED),
+      'iconColor': Color(0xFFF97316),
+    },
+    {
+      'name': 'Black Bag',
+      'location': 'Gulberg Metro',
+      'date': '23 Jun',
+      'status': 'found',
+      'icon': Icons.work,
+      'color': Color(0xFFEFF6FF),
+      'iconColor': Color(0xFF3B82F6),
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    final items = _selectedTab == 0 ? _lostItems : _foundItems;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -83,76 +72,19 @@ class _HomeScreenState extends State<HomeScreen> {
             // Header
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-              child: Row(
-                children: [
-                  Text(
-                    'Findly',
-                    style: GoogleFonts.nunito(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      color: const Color(0xFFF97316),
-                    ),
-                  ),
-                  const Spacer(),
-                  CircleAvatar(
-                    backgroundColor: const Color(0xFFFFF7ED),
-                    child: const Icon(
-                      Icons.person,
-                      color: Color(0xFFF97316),
-                    ),
-                  ),
-                ],
+              child: Text(
+                _selectedTab == 0
+                    ? 'Items I Found'
+                    : 'Items I Lost',
+                style: GoogleFonts.nunito(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: const Color(0xFF1F2937),
+                ),
               ),
             ),
             const SizedBox(height: 12),
-            // Search Bar
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF9FAFB),
-                        border: Border.all(color: const Color(0xFFE5E7EB)),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.search, color: Color(0xFF9CA3AF)),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search for items...',
-                                hintStyle: GoogleFonts.nunito(
-                                  color: const Color(0xFF9CA3AF),
-                                  fontSize: 14,
-                                ),
-                                border: InputBorder.none,
-                                contentPadding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF97316),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(Icons.tune, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 14),
+
             // Tabs
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -176,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Lost Items',
+                            'Found Items',
                             style: GoogleFonts.nunito(
                               fontWeight: FontWeight.w700,
                               fontSize: 13,
@@ -208,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'Found Items',
+                            'Lost Items',
                             style: GoogleFonts.nunito(
                               fontWeight: FontWeight.w700,
                               fontSize: 13,
@@ -225,13 +157,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 14),
-            // Items List
+
+            // List
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: items.length,
+                itemCount: _selectedTab == 0
+                    ? _foundItems.length
+                    : _lostItems.length,
                 itemBuilder: (context, index) {
-                  final item = items[index];
+                  final item = _selectedTab == 0
+                      ? _foundItems[index]
+                      : _lostItems[index];
+                  final isResolved = item['status'] == 'resolved' ||
+                      item['status'] == 'found';
+
                   return Container(
                     margin: const EdgeInsets.only(bottom: 10),
                     padding: const EdgeInsets.all(12),
@@ -249,9 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     child: Row(
                       children: [
+                        // Icon
                         Container(
-                          width: 64,
-                          height: 64,
+                          width: 56,
+                          height: 56,
                           decoration: BoxDecoration(
                             color: item['color'],
                             borderRadius: BorderRadius.circular(12),
@@ -259,10 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Icon(
                             item['icon'],
                             color: item['iconColor'],
-                            size: 28,
+                            size: 24,
                           ),
                         ),
                         const SizedBox(width: 12),
+                        // Info
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,36 +229,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                           fontSize: 11,
                                           color: const Color(0xFF9CA3AF))),
                                   const SizedBox(width: 8),
-                                  const Icon(Icons.access_time,
+                                  const Icon(Icons.calendar_today,
                                       size: 12,
                                       color: Color(0xFF9CA3AF)),
                                   const SizedBox(width: 2),
-                                  Text(item['time'],
+                                  Text(item['date'],
                                       style: GoogleFonts.nunito(
                                           fontSize: 11,
                                           color: const Color(0xFF9CA3AF))),
                                 ],
                               ),
-                              const SizedBox(height: 6),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 3),
-                                decoration: BoxDecoration(
-                                  color: item['status'] == 'lost'
-                                      ? const Color(0xFFFEF2F2)
-                                      : const Color(0xFFF0FDF4),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  item['status'] == 'lost' ? 'Lost' : 'Found',
-                                  style: GoogleFonts.nunito(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w700,
-                                    color: item['status'] == 'lost'
-                                        ? const Color(0xFFEF4444)
-                                        : const Color(0xFF22C55E),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // Status Badge
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 3),
+                                    decoration: BoxDecoration(
+                                      color: isResolved
+                                          ? const Color(0xFFF0FDF4)
+                                          : const Color(0xFFFFF7ED),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Text(
+                                      isResolved
+                                          ? (_selectedTab == 0
+                                              ? 'Returned to Owner'
+                                              : 'Found!')
+                                          : (_selectedTab == 0
+                                              ? 'Open'
+                                              : 'Still Lost'),
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w700,
+                                        color: isResolved
+                                            ? const Color(0xFF22C55E)
+                                            : const Color(0xFFF97316),
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  // Button
+                                  if (!isResolved)
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 5),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFF97316),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Text(
+                                          _selectedTab == 0
+                                              ? 'Mark Resolved'
+                                              : 'Mark Recovered',
+                                          style: GoogleFonts.nunito(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
                             ],
                           ),
