@@ -6,6 +6,7 @@ import 'screens/search_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/records_screen.dart';
 import 'screens/chat_screen.dart';
+
 void main() {
   runApp(const MilaOApp());
 }
