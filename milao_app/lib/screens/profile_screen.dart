@@ -144,13 +144,13 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () {},
                     ),
                     _buildMenuItem(
-                        icon: Icons.chat_bubble_outline,
-                        label: 'Chat History',
-                        onTap: () {
-                           Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                               builder: (context) => const ChatScreen(),
+                      icon: Icons.chat_bubble_outline,
+                      label: 'Chat History',
+                      onTap: () {
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                         builder: (context) => const ChatScreen(),
       ),
     );
   },

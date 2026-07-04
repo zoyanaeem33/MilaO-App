@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'item_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -80,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
               child: Row(
@@ -105,7 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            // Search Bar
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -153,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 14),
-            // Tabs
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -225,103 +223,114 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 14),
-            // Items List
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   final item = items[index];
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: const Color(0xFFF3F4F6)),
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ItemDetailScreen(),
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 64,
-                          height: 64,
-                          decoration: BoxDecoration(
-                            color: item['color'],
-                            borderRadius: BorderRadius.circular(12),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: const Color(0xFFF3F4F6)),
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
                           ),
-                          child: Icon(
-                            item['icon'],
-                            color: item['iconColor'],
-                            size: 28,
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: BoxDecoration(
+                              color: item['color'],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Icon(
+                              item['icon'],
+                              color: item['iconColor'],
+                              size: 28,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item['name'],
-                                style: GoogleFonts.nunito(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF1F2937),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
-                                children: [
-                                  const Icon(Icons.location_on,
-                                      size: 12,
-                                      color: Color(0xFF9CA3AF)),
-                                  const SizedBox(width: 2),
-                                  Text(item['location'],
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 11,
-                                          color: const Color(0xFF9CA3AF))),
-                                  const SizedBox(width: 8),
-                                  const Icon(Icons.access_time,
-                                      size: 12,
-                                      color: Color(0xFF9CA3AF)),
-                                  const SizedBox(width: 2),
-                                  Text(item['time'],
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 11,
-                                          color: const Color(0xFF9CA3AF))),
-                                ],
-                              ),
-                              const SizedBox(height: 6),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 3),
-                                decoration: BoxDecoration(
-                                  color: item['status'] == 'lost'
-                                      ? const Color(0xFFFEF2F2)
-                                      : const Color(0xFFF0FDF4),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  item['status'] == 'lost' ? 'Lost' : 'Found',
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item['name'],
                                   style: GoogleFonts.nunito(
-                                    fontSize: 11,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w700,
-                                    color: item['status'] == 'lost'
-                                        ? const Color(0xFFEF4444)
-                                        : const Color(0xFF22C55E),
+                                    color: const Color(0xFF1F2937),
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.location_on,
+                                        size: 12,
+                                        color: Color(0xFF9CA3AF)),
+                                    const SizedBox(width: 2),
+                                    Text(item['location'],
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 11,
+                                            color: const Color(0xFF9CA3AF))),
+                                    const SizedBox(width: 8),
+                                    const Icon(Icons.access_time,
+                                        size: 12,
+                                        color: Color(0xFF9CA3AF)),
+                                    const SizedBox(width: 2),
+                                    Text(item['time'],
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 11,
+                                            color: const Color(0xFF9CA3AF))),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 3),
+                                  decoration: BoxDecoration(
+                                    color: item['status'] == 'lost'
+                                        ? const Color(0xFFFEF2F2)
+                                        : const Color(0xFFF0FDF4),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    item['status'] == 'lost'
+                                        ? 'Lost'
+                                        : 'Found',
+                                    style: GoogleFonts.nunito(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                      color: item['status'] == 'lost'
+                                          ? const Color(0xFFEF4444)
+                                          : const Color(0xFF22C55E),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
