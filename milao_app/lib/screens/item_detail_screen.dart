@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'chat_screen.dart';
-import 'dart:ui' as ui;
 
 class ItemDetailScreen extends StatelessWidget {
-  const ItemDetailScreen({super.key});
+  final Map<String, dynamic>? itemData;
+  const ItemDetailScreen({super.key, this.itemData});
 
   @override
   Widget build(BuildContext context) {
+    final data = itemData ?? {};
+    final isLost = data['type'] == 'lost';
+    final name = data['name'] ?? 'Unknown Item';
+    final category = data['category'] ?? 'Unknown';
+    final location = data['location'] ?? 'Unknown';
+    final date = data['date'] ?? '';
+    final description = data['description'] ?? 'No description provided.';
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -15,24 +23,28 @@ class ItemDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Back Button + Image
+              // Image Section
               Stack(
                 children: [
                   Container(
                     width: double.infinity,
                     height: 220,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Color(0xFFFFF7ED), Color(0xFFFED7AA)],
+                        colors: isLost
+                            ? [const Color(0xFFFFF7ED), const Color(0xFFFED7AA)]
+                            : [const Color(0xFFF0FDF4), const Color(0xFFBBF7D0)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Icon(
-                        Icons.phone_android,
+                        _getCategoryIcon(category),
                         size: 80,
-                        color: Color(0xFFF97316),
+                        color: isLost
+                            ? const Color(0xFFF97316)
+                            : const Color(0xFF22C55E),
                       ),
                     ),
                   ),
@@ -71,27 +83,33 @@ class ItemDetailScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Samsung Phone',
-                          style: GoogleFonts.nunito(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
-                            color: const Color(0xFF1F2937),
+                        Expanded(
+                          child: Text(
+                            name,
+                            style: GoogleFonts.nunito(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800,
+                              color: const Color(0xFF1F2937),
+                            ),
                           ),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFEF2F2),
+                            color: isLost
+                                ? const Color(0xFFFEF2F2)
+                                : const Color(0xFFF0FDF4),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
-                            'Lost',
+                            isLost ? 'Lost' : 'Found',
                             style: GoogleFonts.nunito(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: const Color(0xFFEF4444),
+                              color: isLost
+                                  ? const Color(0xFFEF4444)
+                                  : const Color(0xFF22C55E),
                             ),
                           ),
                         ),
@@ -99,7 +117,7 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Phone / Gadget',
+                      category,
                       style: GoogleFonts.nunito(
                         fontSize: 13,
                         color: const Color(0xFF9CA3AF),
@@ -108,26 +126,39 @@ class ItemDetailScreen extends StatelessWidget {
                     const SizedBox(height: 12),
 
                     // Location
-                    _buildDetailRow(
-                      Icons.location_on,
-                      'Anarkali Bazaar, Lahore',
+                    Row(
+                      children: [
+                        const Icon(Icons.location_on,
+                            size: 16, color: Color(0xFFF97316)),
+                        const SizedBox(width: 8),
+                        Text(location,
+                            style: GoogleFonts.nunito(
+                                fontSize: 13, color: const Color(0xFF6B7280))),
+                      ],
                     ),
                     const SizedBox(height: 8),
 
                     // Date
-                    _buildDetailRow(
-                      Icons.calendar_today,
-                      '24 June 2026',
-                    ),
+                    if (date.isNotEmpty)
+                      Row(
+                        children: [
+                          const Icon(Icons.calendar_today,
+                              size: 16, color: Color(0xFFF97316)),
+                          const SizedBox(width: 8),
+                          Text(date,
+                              style: GoogleFonts.nunito(
+                                  fontSize: 13,
+                                  color: const Color(0xFF6B7280))),
+                        ],
+                      ),
                     const SizedBox(height: 16),
 
-                    // Divider
                     const Divider(color: Color(0xFFF3F4F6)),
                     const SizedBox(height: 12),
 
                     // Description
                     Text(
-                      'Description',
+                      'DESCRIPTION',
                       style: GoogleFonts.nunito(
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
@@ -137,7 +168,7 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Black Samsung Galaxy A54, some scratches on the back. Lost outside Anarkali shop. Screen had no cracks.',
+                      description,
                       style: GoogleFonts.nunito(
                         fontSize: 13,
                         color: const Color(0xFF374151),
@@ -146,7 +177,6 @@ class ItemDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
 
-                    // Divider
                     const Divider(color: Color(0xFFF3F4F6)),
                     const SizedBox(height: 12),
 
@@ -169,7 +199,6 @@ class ItemDetailScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          // Blurred Avatar
                           Container(
                             width: 44,
                             height: 44,
@@ -177,29 +206,15 @@ class ItemDetailScreen extends StatelessWidget {
                               color: Color(0xFFFFF7ED),
                               shape: BoxShape.circle,
                             ),
-                            child: ImageFiltered(
-                              imageFilter: ui.ImageFilter.blur(
-                                sigmaX: 4,
-                                sigmaY: 4,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'AK',
-                                  style: GoogleFonts.nunito(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w800,
-                                    color: const Color(0xFFF97316),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            child: const Icon(Icons.person,
+                                color: Color(0xFFF97316)),
                           ),
                           const SizedBox(width: 12),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Ahmad K.',
+                                'Anonymous User',
                                 style: GoogleFonts.nunito(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
@@ -233,16 +248,24 @@ class ItemDetailScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(isLost
+                                  ? 'Thank you! Owner will be contacted.'
+                                  : 'Great! You will be contacted soon.'),
+                              backgroundColor: const Color(0xFF22C55E),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFF97316),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
+                              borderRadius: BorderRadius.circular(14)),
                         ),
                         child: Text(
-                          'I Found This!',
+                          isLost ? 'I Found This!' : 'This is Mine!',
                           style: GoogleFonts.nunito(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
@@ -265,22 +288,16 @@ class ItemDetailScreen extends StatelessWidget {
                         },
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(
-                            color: Color(0xFFF97316),
-                            width: 2,
-                          ),
+                              color: Color(0xFFF97316), width: 2),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
+                              borderRadius: BorderRadius.circular(14)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(
-                              Icons.chat_bubble_outline,
-                              color: Color(0xFFF97316),
-                              size: 18,
-                            ),
+                            const Icon(Icons.chat_bubble_outline,
+                                color: Color(0xFFF97316), size: 18),
                             const SizedBox(width: 8),
                             Text(
                               'Chat',
@@ -304,19 +321,14 @@ class ItemDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(IconData icon, String text) {
-    return Row(
-      children: [
-        Icon(icon, size: 16, color: const Color(0xFFF97316)),
-        const SizedBox(width: 8),
-        Text(
-          text,
-          style: GoogleFonts.nunito(
-            fontSize: 13,
-            color: const Color(0xFF6B7280),
-          ),
-        ),
-      ],
-    );
+  IconData _getCategoryIcon(String category) {
+    switch (category) {
+      case 'Phone / Gadget': return Icons.phone_android;
+      case 'Bag / Wallet': return Icons.work;
+      case 'Documents': return Icons.credit_card;
+      case 'Keys': return Icons.key;
+      case 'Jewelry': return Icons.diamond;
+      default: return Icons.inventory_2;
+    }
   }
 }

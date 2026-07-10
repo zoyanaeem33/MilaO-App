@@ -1,4 +1,4 @@
-package com.example.milao_app
+package com.example.Findly_app
 
 import io.flutter.embedding.android.FlutterActivity
 

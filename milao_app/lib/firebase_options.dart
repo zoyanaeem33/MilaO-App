@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '663201918739',
     projectId: 'findly-app-de4a4',
     storageBucket: 'findly-app-de4a4.firebasestorage.app',
-    iosBundleId: 'com.example.milaoApp',
+    iosBundleId: 'com.example.FindlyApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '663201918739',
     projectId: 'findly-app-de4a4',
     storageBucket: 'findly-app-de4a4.firebasestorage.app',
-    iosBundleId: 'com.example.milaoApp',
+    iosBundleId: 'com.example.FindlyApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

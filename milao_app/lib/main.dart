@@ -5,22 +5,21 @@ import 'screens/post_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/records_screen.dart';
-import 'screens/chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'screens/login_screen.dart'; 
+import 'screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MilaOApp());
+  runApp(const FindlyApp());
 }
 
-class MilaOApp extends StatelessWidget {
-  const MilaOApp({super.key});
+class FindlyApp extends StatelessWidget {
+  const FindlyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +36,21 @@ class MilaOApp extends StatelessWidget {
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-         if (snapshot.hasData) {
-             return const MainNavigation();
-    }
-    return const LoginScreen();
-  },
-),
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFFF97316),
+                ),
+              ),
+            );
+          }
+          if (snapshot.hasData) {
+            return const MainNavigation();
+          }
+          return const LoginScreen();
+        },
+      ),
     );
   }
 }
@@ -86,7 +94,7 @@ class _MainNavigationState extends State<MainNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_rounded),
-            label: 'Dhoondo',
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(

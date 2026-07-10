@@ -7,11 +7,11 @@ import 'screens/profile_screen.dart';
 import 'screens/records_screen.dart';
 import 'screens/chat_screen.dart';
 void main() {
-  runApp(const MilaOApp());
+  runApp(const FindlyApp());
 }
 
-class MilaOApp extends StatelessWidget {
-  const MilaOApp({super.key});
+class FindlyApp extends StatelessWidget {
+  const FindlyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
