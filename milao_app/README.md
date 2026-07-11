@@ -1,4 +1,4 @@
-# milao_app
+# Findly_app
 
 A new Flutter project.
 
