@@ -5,16 +5,9 @@ import 'screens/post_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/records_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'screens/login_screen.dart';
+import 'screens/chat_screen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+void main() {
   runApp(const FindlyApp());
 }
 
@@ -33,24 +26,7 @@ class FindlyApp extends StatelessWidget {
         textTheme: GoogleFonts.nunitoTextTheme(),
         useMaterial3: true,
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(
-                  color: Color(0xFFF97316),
-                ),
-              ),
-            );
-          }
-          if (snapshot.hasData) {
-            return const MainNavigation();
-          }
-          return const LoginScreen();
-        },
-      ),
+      home: const MainNavigation(),
     );
   }
 }
@@ -94,7 +70,7 @@ class _MainNavigationState extends State<MainNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_rounded),
-            label: 'Search',
+            label: 'Dhoondo',
           ),
           BottomNavigationBarItem(
             icon: Icon(

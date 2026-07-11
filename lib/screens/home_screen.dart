@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'item_detail_screen.dart';
 import 'profile_screen.dart';
 import 'search_screen.dart';
+import 'dart:convert';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -268,13 +269,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : const Color(0xFFF0FDF4),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: Icon(
-                                  _getCategoryIcon(data['category'] ?? ''),
-                                  color: isLost
-                                      ? const Color(0xFFF97316)
-                                      : const Color(0xFF22C55E),
-                                  size: 28,
-                                ),
+                                child: data['imageBase64'] != null &&
+                                        data['imageBase64'].toString().isNotEmpty
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.memory(
+                                          base64Decode(data['imageBase64']),
+                                          fit: BoxFit.cover,
+                                          width: 64,
+                                          height: 64,
+                                        ),
+                                      )
+                                    : Icon(
+                                        _getCategoryIcon(data['category'] ?? ''),
+                                        color: isLost
+                                            ? const Color(0xFFF97316)
+                                            : const Color(0xFF22C55E),
+                                        size: 28,
+                                      ),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
